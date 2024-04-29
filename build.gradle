@@ -1,15 +1,28 @@
-plugins {
-    id 'war'
-    id 'io.openliberty.tools.gradle.Liberty' version '3.8'
-}
+// tag::war[]
+apply plugin: 'war'
+// end::war[]
+// tag::liberty[]
+apply plugin: 'liberty'
+// end::liberty[]
 
-version '1.0-SNAPSHOT'
-group 'com.demo'
+
+// version '1.0-SNAPSHOT'
+// group 'com.demo'
 
 sourceCompatibility = 17
 targetCompatibility = 17
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+// configure liberty-gradle-plugin 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'io.openliberty.tools:liberty-gradle-plugin:3.7'
+    }
 }
 
 repositories {
@@ -19,8 +32,14 @@ repositories {
 dependencies {
     // provided dependencies
     providedCompile 'jakarta.platform:jakarta.jakartaee-api:10.0.0' 
+    providedCompile 'javax:javaee-api:8.0' // Adjust version as needed
     providedCompile 'org.eclipse.microprofile:microprofile:6.1' 
+}
 
+ext  {
+    liberty.server.var.'http.port' = '9080'
+    liberty.server.var.'https.port' = '9443'
+    liberty.server.var.'app.context.root' = project.name
 }
 
 clean.dependsOn 'libertyStop'

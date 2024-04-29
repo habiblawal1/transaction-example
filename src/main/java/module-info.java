@@ -3,4 +3,6 @@ module TransactionExample {
 	requires jakarta.annotation;
 	requires jakarta.ejb;
 	requires jakarta.messaging;
+	requires jakarta.servlet;
+	requires java.naming;
 }
