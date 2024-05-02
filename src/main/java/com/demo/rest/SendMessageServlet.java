@@ -33,7 +33,7 @@ public class SendMessageServlet extends HttpServlet {
     @Resource(lookup = "jms/libertyQCF")
     ConnectionFactory jmsFactory;
 
-    @Resource(lookup = "jms/libertyQue")
+    @Resource(lookup = "jms/HelloQueue")
     Queue jmsQueue;
 
     Connection connection;

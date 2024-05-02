@@ -46,22 +46,43 @@
 
     <webApplication id="TransactionTest" location="TransactionTest.war"
         contextRoot="transactions" />
-
+    <!-- 
     <messagingEngine>
-        <queue id="libertyQ" />
+        <queue id="libertyQue" />
     </messagingEngine>
 
-    <jmsQueueConnectionFactory jndiName="jms/libertyQCF">
+    <jmsQueueConnectionFactory id="jms/libertyQCF" jndiName="jms/libertyQCF">
         <properties.wasJms remoteServerAddress="localhost:7276: BootStrapBasic Messaging" />
     </jmsQueueConnectionFactory>
 
     <jmsQueue id="jms/libertyQue" jndiName="jms/libertyQue">
-        <properties.wasJms queueName="libertyQ" />
+        <properties.wasJms queueName="libertyQue" />
     </jmsQueue>
 
     <jmsActivationSpec id="jms-messaging-open-liberty/JmsMessageReader">
         <properties.wasJms destinationRef="jms/libertyQue" />
+    </jmsActivationSpec> -->
+
+    <messagingEngine>
+        <queue id="jms/HelloQueue" />
+    </messagingEngine>
+
+    <jmsQueue id="jms/HelloQueue" jndiName="jms/HelloQueue">
+        <properties.wasJms queueName="jms/HelloQueue" />
+    </jmsQueue>
+
+    <jmsActivationSpec id="TransactionTest/ReadMessageMDB">
+        <properties.wasJms
+            destinationRef="jms/HelloQueue"
+        />
     </jmsActivationSpec>
+
+    <jmsQueueConnectionFactory jndiName="jms/libertyQCF" connectionManagerRef="ConMgr2">
+        <properties.wasJms
+            nonPersistentMapping="ExpressNonPersistent"
+            persistentMapping="ReliablePersistent" />
+    </jmsQueueConnectionFactory>
+    <connectionManager id="ConMgr2" maxPoolSize="2" />
 
     <!-- 
     <messagingEngine>

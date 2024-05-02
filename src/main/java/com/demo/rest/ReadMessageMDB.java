@@ -6,8 +6,16 @@ import jakarta.jms.MessageListener;
 import jakarta.jms.TextMessage;
 import jakarta.ejb.MessageDriven;
 import jakarta.ejb.ActivationConfigProperty;
+import jakarta.jms.Queue;
 
-@MessageDriven
+// @MessageDriven(mappedName = "jms/HelloQueue")
+// @MessageDriven(mappedName = "jms/HelloQueue", activationConfig = {
+//         @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
+//         @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "jakarta.jms.Queue")
+// })
+@MessageDriven(mappedName = "jms/HelloQueue", activationConfig = {
+        @ActivationConfigProperty(propertyName = "destinationName", propertyValue = "jms/HelloQueue"),
+        @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "jakarta.jms.Queue") })
 public class ReadMessageMDB implements MessageListener {
     @Override
     public void onMessage(Message message) {
