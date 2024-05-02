@@ -46,22 +46,6 @@
 
     <webApplication id="TransactionTest" location="TransactionTest.war"
         contextRoot="transactions" />
-    <!-- 
-    <messagingEngine>
-        <queue id="libertyQue" />
-    </messagingEngine>
-
-    <jmsQueueConnectionFactory id="jms/libertyQCF" jndiName="jms/libertyQCF">
-        <properties.wasJms remoteServerAddress="localhost:7276: BootStrapBasic Messaging" />
-    </jmsQueueConnectionFactory>
-
-    <jmsQueue id="jms/libertyQue" jndiName="jms/libertyQue">
-        <properties.wasJms queueName="libertyQue" />
-    </jmsQueue>
-
-    <jmsActivationSpec id="jms-messaging-open-liberty/JmsMessageReader">
-        <properties.wasJms destinationRef="jms/libertyQue" />
-    </jmsActivationSpec> -->
 
     <messagingEngine>
         <queue id="jms/HelloQueue" />
@@ -76,46 +60,8 @@
             destinationRef="jms/HelloQueue"
         />
     </jmsActivationSpec>
-
-    <jmsQueueConnectionFactory jndiName="jms/libertyQCF" connectionManagerRef="ConMgr2">
-        <properties.wasJms
-            nonPersistentMapping="ExpressNonPersistent"
-            persistentMapping="ReliablePersistent" />
-    </jmsQueueConnectionFactory>
-    <connectionManager id="ConMgr2" maxPoolSize="2" />
-
-    <!-- 
-    <messagingEngine>
-        <queue id="libertyQ"
-            forceReliability="ReliablePersistent"
-            maxMessageDepth="5000">
-        </queue>
-    </messagingEngine>
-
-    <jmsQueueConnectionFactory jndiName="jms/libertyQCF" connectionManagerRef="ConMgr2">
-        <properties.wasJms
-            nonPersistentMapping="ExpressNonPersistent"
-            persistentMapping="ReliablePersistent" />
-    </jmsQueueConnectionFactory>
-    <connectionManager id="ConMgr2" maxPoolSize="2" />
-
-    <jmsQueue jndiName="jms/libertyQue">
-        <properties.wasJms queueName="libertyQ"
-            deliveryMode="Application"
-            timeToLive="500000"
-            priority="1"
-            readAhead="AsConnection" />
-    </jmsQueue>
-
-    <jmsActivationSpec id="JMSSample/JMSApp/SampleMDB">
-        <properties.wasJms destinationRef="jms/libertyQue" />
-    </jmsActivationSpec> -->
-
-    <!-- <jmsQueue id="MyQueue" jndiName="jms/MyQueue">
-        <properties.wasJms queueName="libertyQ"/>
-    </jmsQueue>
-
-    <jmsConnectionFactory jndiName="jms/MyConnectionFactory">
+    <jmsConnectionFactory id="jms/libertyQCF" jndiName="jms/libertyQCF">
         <properties.wasJms />
-    </jmsConnectionFactory> -->
+    </jmsConnectionFactory>
+
 </server>
